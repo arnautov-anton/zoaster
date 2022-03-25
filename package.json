@@ -1,0 +1,51 @@
+{
+	"name": "zoaster",
+	"version": "0.1.0",
+	"description": "Toasty library",
+	"source": "src/index.tsx",
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.js",
+	"types": "dist/types.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/arnautov-anton/zoaster"
+	},
+	"browserslist": [
+		">0.2%",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"scripts": {
+		"build": "parcel build"
+	},
+	"keywords": [
+		"zustand",
+		"zoaster",
+		"toast",
+		"toaster",
+		"react"
+	],
+	"author": {
+		"name": "Anton Arnautov",
+		"email": "anton@getstream.io"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"@emotion/css": "^11.7.1",
+		"immer": "^9.0.12",
+		"react": "^17.0.2",
+		"uuid": "^8.3.2",
+		"zustand": "^3.7.1"
+	},
+	"peerDependencies": {
+		"@swc/helpers": "^0.3.8"
+	},
+	"devDependencies": {
+		"@parcel/packager-ts": "2.4.0",
+		"@parcel/transformer-typescript-types": "2.4.0",
+		"@types/react": "^17.0.42",
+		"@types/uuid": "^8.3.4",
+		"parcel": "^2.4.0",
+		"typescript": "^4.6.2"
+	}
+}
