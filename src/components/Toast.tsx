@@ -1,9 +1,8 @@
 import {
 	isValidElement,
 	useEffect,
-	ElementType,
 	ComponentType,
-	ReactNode,
+	ReactElement,
 	useCallback,
 	createContext,
 	PropsWithChildren,
@@ -18,7 +17,7 @@ const ToastContextProvider = (
 ) => <ToastContext.Provider {...props} />;
 
 export type ToastProps = {
-	UIElement: ReactNode;
+	UIToast: ReactElement | ComponentType;
 	timeout: number | null;
 	id: string;
 	listName: string;
@@ -26,9 +25,9 @@ export type ToastProps = {
 
 export type UIToastProps = {
 	dismiss: () => void;
-} & Pick<ToastProps, "id" | "listName" | "timeout">;
+} & Omit<ToastProps, "UIToast">;
 
-export const Toast = ({ UIElement, timeout, id, listName }: ToastProps) => {
+export const Toast = ({ UIToast, timeout, id, listName }: ToastProps) => {
 	const removeToast = ToastStore.getState().removeToast;
 
 	const dismiss = useCallback(() => removeToast(id, listName), []);
@@ -47,16 +46,7 @@ export const Toast = ({ UIElement, timeout, id, listName }: ToastProps) => {
 
 	return (
 		<ToastContextProvider value={{ timeout, id, listName, dismiss }}>
-			{UIElement}
+			{isValidElement(UIToast) ? UIToast : <UIToast />}
 		</ToastContextProvider>
 	);
-
-	// return (
-	// 	<UIComponentOrElement
-	// 		dismiss={dismiss}
-	// 		id={id}
-	// 		listName={listName}
-	// 		timeout={timeout}
-	// 	/>
-	// );
 };

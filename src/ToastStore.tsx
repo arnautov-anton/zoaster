@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { ElementType } from "react";
+import { ReactElement } from "react";
 import create from "zustand";
 import { produce } from "immer";
 
@@ -8,10 +8,8 @@ import { ToastProps, Toast } from "./components";
 type UUID = string;
 
 export type ToastStoreType = {
-	toasts: Record<string, Array<{ id: UUID; toast: ElementType }>>;
-	pushToast: (
-		props: Pick<ToastProps, "UIElement" | "timeout" | "listName">
-	) => void;
+	toasts: Record<string, Array<{ id: UUID; toast: ReactElement }>>;
+	pushToast: (props: Omit<ToastProps, "id">) => void;
 	createList: (name: string) => void;
 	removeList: (name: string) => void;
 	removeToast: (id: string, listName: string) => void;
@@ -20,14 +18,14 @@ export type ToastStoreType = {
 
 export const ToastStore = create<ToastStoreType>((set, get) => ({
 	toasts: {},
-	pushToast: ({ UIElement, timeout, listName }) => {
+	pushToast: ({ UIToast, timeout, listName }) => {
 		const id = uuid();
 
 		if (!get().toasts[listName])
 			throw new Error(`List with name "${listName}" is missing from the VDOM`);
 
 		return set(
-			produce((draft) => {
+			produce<ToastStoreType>((draft) => {
 				draft.toasts[listName].push({
 					id,
 					toast: (
@@ -35,7 +33,7 @@ export const ToastStore = create<ToastStoreType>((set, get) => ({
 							key={id}
 							id={id}
 							listName={listName}
-							UIElement={UIElement}
+							UIToast={UIToast}
 							timeout={timeout}
 						/>
 					),
@@ -45,7 +43,7 @@ export const ToastStore = create<ToastStoreType>((set, get) => ({
 	},
 	createList: (name: string) =>
 		set(
-			produce((draft) => {
+			produce<ToastStoreType>((draft) => {
 				draft.toasts[name] = [];
 			})
 		),
