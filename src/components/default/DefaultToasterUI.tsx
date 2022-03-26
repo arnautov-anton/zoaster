@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { css } from "@emotion/css";
 
-export const DefaultToasterUI = ({ customData, dismiss, timeout }) => {
+export const DefaultToasterUI = () => {
 	return (
 		<div
 			className={css`

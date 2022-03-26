@@ -6,7 +6,7 @@ import {
 	Fragment,
 } from "react";
 
-import { ToastStore as useStore } from "../ToastStore";
+import { ToastStore as useStore } from "../context/ToastStore";
 
 export type ToastListProps = {
 	name: string;

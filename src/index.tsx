@@ -1,7 +1,7 @@
 export { ToastList } from "./components";
 export type { ToastListProps, ToastProps } from "./components";
-export { useToast } from "./hooks";
-export type { ToastStoreType } from "./ToastStore";
+export { useToast, useToastContext } from "./hooks";
+export type { ToastStoreType } from "./context";
 
 // const CustomComponent = ({ dismiss }) => {
 // 	return <h1 onClick={dismiss}>mytext</h1>;

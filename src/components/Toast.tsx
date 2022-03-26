@@ -4,17 +4,10 @@ import {
 	ComponentType,
 	ReactElement,
 	useCallback,
-	createContext,
-	PropsWithChildren,
+	useMemo,
 } from "react";
 
-import { ToastStore } from "../ToastStore";
-
-const ToastContext = createContext<UIToastProps | undefined>(undefined);
-
-const ToastContextProvider = (
-	props: PropsWithChildren<{ value: UIToastProps }>
-) => <ToastContext.Provider {...props} />;
+import { ToastStore, ToastContextProvider } from "../context";
 
 export type ToastProps = {
 	UIToast: ReactElement | ComponentType;
@@ -25,10 +18,10 @@ export type ToastProps = {
 
 export type UIToastProps = {
 	dismiss: () => void;
-} & Omit<ToastProps, "UIToast">;
+} & Pick<ToastProps, "id" | "listName" | "timeout">;
 
 export const Toast = ({ UIToast, timeout, id, listName }: ToastProps) => {
-	const removeToast = ToastStore.getState().removeToast;
+	const removeToast = useMemo(() => ToastStore.getState().removeToast, []);
 
 	const dismiss = useCallback(() => removeToast(id, listName), []);
 

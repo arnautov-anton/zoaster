@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# examples
+/examples
+
 # production
 /dist
 

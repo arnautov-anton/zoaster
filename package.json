@@ -1,6 +1,6 @@
 {
 	"name": "zoaster",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Toasty library",
 	"source": "src/index.tsx",
 	"main": "dist/index.cjs.js",
@@ -16,7 +16,9 @@
 		"not op_mini all"
 	],
 	"scripts": {
-		"build": "parcel build"
+		"bundle": "parcel build",
+		"prepare": "rm -rf dist/ && yarn bundle",
+		"watch": "paracel watch"
 	},
 	"keywords": [
 		"zustand",

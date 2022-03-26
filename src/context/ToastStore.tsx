@@ -3,13 +3,15 @@ import { ReactElement } from "react";
 import create from "zustand";
 import { produce } from "immer";
 
-import { ToastProps, Toast } from "./components";
+import { Toast, ToastProps } from "../components";
 
 type UUID = string;
 
 export type ToastStoreType = {
 	toasts: Record<string, Array<{ id: UUID; toast: ReactElement }>>;
-	pushToast: (props: Omit<ToastProps, "id">) => void;
+	pushToast: (
+		props: Pick<ToastProps, "UIToast" | "listName" | "timeout">
+	) => void;
 	createList: (name: string) => void;
 	removeList: (name: string) => void;
 	removeToast: (id: string, listName: string) => void;
@@ -49,18 +51,16 @@ export const ToastStore = create<ToastStoreType>((set, get) => ({
 		),
 	removeList: (name) =>
 		set(
-			produce((draft) => {
+			produce<ToastStoreType>((draft) => {
 				delete draft.toasts[name];
 			})
 		),
 	removeToast: (id, listName) =>
 		set(
-			produce((draft) => {
+			produce<ToastStoreType>((draft) => {
 				if (!draft.toasts[listName]) return;
 
-				const index = draft.toasts[listName].findIndex(
-					(n: ToastStoreType["toasts"][string][number]) => n.id === id
-				);
+				const index = draft.toasts[listName].findIndex((n) => n.id === id);
 
 				if (index > -1) draft.toasts[listName].splice(index, 1);
 			})
