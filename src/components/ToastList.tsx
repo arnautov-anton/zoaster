@@ -29,5 +29,7 @@ export const ToastList = ({
 		return () => removeList(name);
 	}, [name]);
 
+	if (!list.length) return null;
+
 	return <WrapperComponent>{list.map((v) => v.toast)}</WrapperComponent>;
 };
