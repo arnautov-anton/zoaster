@@ -7,8 +7,5 @@ export const useToast = () => {
 		[]
 	);
 
-	return { removeToast, pushToast, clearToasts } as Pick<
-		ToastStoreType,
-		"removeToast" | "pushToast" | "clearToasts"
-	>;
+	return { removeToast, pushToast, clearToasts };
 };

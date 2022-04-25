@@ -10,7 +10,7 @@ import { ToastStore as useStore } from "../context/ToastStore";
 
 export type ToastListProps = {
 	name: string;
-	WrapperComponent?: ComponentType<PropsWithChildren<Record<string, unknown>>>;
+	WrapperComponent?: ComponentType<PropsWithChildren<Record<never, never>>>;
 };
 
 export const ToastList = ({
