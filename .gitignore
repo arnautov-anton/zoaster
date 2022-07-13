@@ -6,8 +6,8 @@
 # testing
 /coverage
 
-# examples
-/examples
+/examples/**/node_modules
+/examples/**/dist
 
 # production
 /dist
